@@ -120,22 +120,23 @@ public class FlightPlanner {
 
     private FlightPath createPath(Stack<PathState> stack, String source, String destination) {
         FlightPath path = new FlightPath();
-        ArrayList<String> reversedPath = new ArrayList<>();
+        ArrayList<String> cities = new ArrayList<>();
 
-        // Build the path in reverse order
-        reversedPath.add(destination);
+        // Build the path
         LinkedList<PathState> states = stack.getList();
         Node<PathState> current = states.getHead();
         while (current != null) {
-            reversedPath.add(current.data.city);
+            if (!cities.contains(current.data.city)) { // Only add if not already in path
+                cities.add(current.data.city);
+            }
             current = current.next;
         }
 
-        // Add cities in correct order
-        for (int i = reversedPath.size() - 1; i >= 0; i--) {
-            path.addCity(reversedPath.get(i));
+        // Add cities in correct order and calculate costs
+        for (int i = cities.size() - 1; i >= 0; i--) {
+            path.addCity(cities.get(i));
             if (i > 0) {
-                Flight flight = findFlight(reversedPath.get(i), reversedPath.get(i-1));
+                Flight flight = findFlight(cities.get(i), cities.get(i-1));
                 if (flight != null) {
                     path.addCost(flight.cost);
                     path.addTime(flight.time);
