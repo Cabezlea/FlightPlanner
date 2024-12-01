@@ -126,7 +126,7 @@ public class FlightPlanner {
         LinkedList<PathState> states = stack.getList();
         Node<PathState> current = states.getHead();
         while (current != null) {
-            if (!cities.contains(current.data.city)) { // Only add if not already in path
+            if (!cities.contains(current.data.city)) {
                 cities.add(current.data.city);
             }
             current = current.next;
