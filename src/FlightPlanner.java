@@ -21,7 +21,7 @@ public class FlightPlanner {
 
     @SuppressWarnings("unchecked")
     public FlightPlanner() {
-        adjacencyList = new LinkedList[100];  // Support up to 100 cities
+        adjacencyList = new LinkedList[100];
         cityIndex = new ArrayList<>();
     }
 
@@ -43,7 +43,7 @@ public class FlightPlanner {
         int sourceIdx = addCity(source);
         int destIdx = addCity(destination);
 
-        // Add flight in both directions since flights are bidirectional
+
         adjacencyList[sourceIdx].add(new Flight(destination, cost, time));
         adjacencyList[destIdx].add(new Flight(source, cost, time));
     }
@@ -55,12 +55,12 @@ public class FlightPlanner {
     public LinkedList<FlightPath> findPaths(String source, String destination, boolean sortByTime) {
         LinkedList<FlightPath> allPaths = new LinkedList<>();
         Stack<PathState> stack = new Stack<>();
-        HashSet<String> visited = new HashSet<>();  // Changed to HashSet for better performance
+        HashSet<String> visited = new HashSet<>();
 
         int sourceIdx = getCityIndex(source);
         if (sourceIdx == -1) return allPaths;
 
-        // Initialize search
+
         visited.add(source);
         LinkedList<Flight> sourceFlights = adjacencyList[sourceIdx];
         if (sourceFlights != null) {
@@ -79,7 +79,7 @@ public class FlightPlanner {
                 continue;
             }
 
-            // Try next flight from current city
+
             Flight flight = currentFlight.data;
             stack.pop();
             stack.push(new PathState(currentCity, currentFlight.next));

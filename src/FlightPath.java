@@ -34,14 +34,14 @@ public class FlightPath implements Comparable<FlightPath> {
         return totalTime;
     }
 
-    // Used for sorting paths
+
     @Override
     public int compareTo(FlightPath other) {
-        // Default comparison by cost
+
         return Integer.compare(this.totalCost, other.totalCost);
     }
 
-    // Method to compare by time instead of cost
+
     public int compareByTime(FlightPath other) {
         return Integer.compare(this.totalTime, other.totalTime);
     }
